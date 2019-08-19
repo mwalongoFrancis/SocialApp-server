@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateAlbumsTable extends Migration
 {
     /**
@@ -15,17 +13,16 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('title');
-            $table->bigIncrements('subtitle');
-            $table->bigIncrements('cover');
-            $table->bigIncrements('avatar');
-            $table->bigIncrements('is_hot');
-            $table->bigIncrements('details');
+            $table->string('title');
+            $table->string('subtitle');
+            $table->string('cover');
+            $table->boolean('is_hot');
+            $table->text('details');
             $table->bigInteger('author_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
