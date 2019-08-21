@@ -44,6 +44,12 @@ class AlbumController extends Controller
                 'status' => false
             ], 404);
         }
+            
+            $author = Author::find($author_id);
+            if(!$author){
+                return response()->json(['error'=>"Author not found"],404);
+            }
+        
         $album = new Album();
         $album->title = $request->input('title');
         $album->subtitle = $request->input('subtitle');
@@ -51,7 +57,7 @@ class AlbumController extends Controller
         $album->details = $request->input('details');
         $album->author_id = $request->input('author_id');
         $album->cover = $request->input('cover');
-        $album->save();
+        $author->albums()->save($album);
         return response()->json([
             'album' => $album
         ], 201);
